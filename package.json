@@ -9,7 +9,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "botkit": "^0.5.2"
+    "botkit": "^0.5.2",
+    "particle": "^0.1.4",
+    "particle-api-js": "^6.4.3"
   },
   "devDependencies": {},
   "repository": {
