@@ -160,7 +160,7 @@ controller.hears(['uptime', 'identify yourself', 'who are you', 'what is your na
 
     });
 
-controller.hears(['brian', 'nick', 'ish'],
+controller.hears(['brian', 'nick', 'maddy'],
 'direct_message,direct_mention,mention', function(bot, message) {
     bot.reply(message,
         'yall are lame ass bitches :+1:');
