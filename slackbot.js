@@ -1,14 +1,29 @@
-if (!process.env.token) {
+if (!process.env.token || !process.env.username || !process.env.password) {
     console.log('Error: Specify token in environment');
     process.exit(1);
 }
 
 var Botkit = require('Botkit');
+var Particle = require('particle-api-js')
 var os = require('os');
 
 var controller = Botkit.slackbot({
     debug: true,
 });
+
+var particle = new Particle();
+var token;
+var device_id = '2c0018001447353136383631';
+
+particle.login({username: process.env.username, password: process.env.password}).then(
+  function(data){
+    console.log('API call completed on promise resolve: ', data.body.access_token);
+    token = data.body.access_token;
+  },
+  function(err) {
+    console.log('API call completed on promise fail: ', err);
+  }
+);
 
 var bot = controller.spawn({
     token: process.env.token
@@ -160,10 +175,43 @@ controller.hears(['uptime', 'identify yourself', 'who are you', 'what is your na
 
     });
 
-controller.hears(['brian', 'nick', 'ish', 'maddy'],
+controller.hears(['zone 1'],
 'direct_message,direct_mention,mention', function(bot, message) {
     bot.reply(message,
-        'yall are lame ass bitches :+1:');
+        'Shhh! In zone 1!');
+    particle.callFunction({ deviceId: device_id, name: 'zoneSelect', argument: '1', auth: token })
+    .then(
+        function(data) {
+            console.log('Function called succesfully:', data);
+        }, function(err) {
+            console.log('An error occurred:', err);
+    });
+});
+
+controller.hears(['zone 2'],
+'direct_message,direct_mention,mention', function(bot, message) {
+    bot.reply(message,
+        'Shhh! In zone 2!');
+    particle.callFunction({ deviceId: device_id, name: 'zoneSelect', argument: '2', auth: token })
+    .then(
+        function(data) {
+            console.log('Function called succesfully:', data);
+        }, function(err) {
+            console.log('An error occurred:', err);
+    });
+});
+
+controller.hears(['zone 3'],
+'direct_message,direct_mention,mention', function(bot, message) {
+    bot.reply(message,
+        'Shhh! In zone 3!');
+    particle.callFunction({ deviceId: device_id, name: 'zoneSelect', argument: '3', auth: token })
+    .then(
+        function(data) {
+            console.log('Function called succesfully:', data);
+        }, function(err) {
+            console.log('An error occurred:', err);
+    });
 });
 
 function formatUptime(uptime) {
