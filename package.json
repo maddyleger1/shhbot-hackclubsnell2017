@@ -1,0 +1,23 @@
+{
+  "name": "shhbot",
+  "version": "1.0.0",
+  "description": "Shh bot quiets down people who are being loud!",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "botkit": "^0.5.2"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maddyleger1/shhbot-hackclubsnell2017.git"
+  },
+  "bugs": {
+    "url": "https://github.com/maddyleger1/shhbot-hackclubsnell2017/issues"
+  },
+  "homepage": "https://github.com/maddyleger1/shhbot-hackclubsnell2017#readme"
+}
