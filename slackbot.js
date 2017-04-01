@@ -166,6 +166,12 @@ controller.hears(['brian', 'nick', 'maddy'],
         'yall are lame ass bitches :+1:');
 });
 
+controller.hears(['maddy'],
+'direct_message,direct_mention,mention', function(bot, message) {
+    bot.reply(message,
+        'ure a loser');
+});
+
 function formatUptime(uptime) {
     var unit = 'second';
     if (uptime > 60) {
