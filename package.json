@@ -1,8 +1,8 @@
 {
   "name": "shhbot",
   "version": "1.0.0",
-  "description": "Shh bot quiets down people who are being loud!",
-  "main": "index.js",
+  "description": "ShhBot quiets down people who are being loud!",
+  "main": "slackbot.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
