@@ -1,32 +1,62 @@
-void setup() {
-  // put your setup code here, to run once:
-  pinMode(LED_BUILTIN, OUTPUT);
-  Serial.begin(9600);
+// Global Vars
+int motorPin1 = 3;
+int motorPin2 = 2;
+int speed = 150;
+
+// set up pins, particle connection, and make sure bot is off
+void setup() 
+{ 
+  Serial.begin(9600);      // open the serial port at 9600 bps:    
+  pinMode(motorPin1, OUTPUT);
+  pinMode(motorPin2, OUTPUT);
+  pinMode(13, OUTPUT);
+
+  stopBot();
+} 
+
+// the buzzer noise
+void beep()
+{
+  digitalWrite(13, HIGH);
+  delay(500);
+  digitalWrite(13, LOW);
 }
 
-void loop() {
-  // put your main code here, to run repeatedly:
-      
+// turn on the motors
+void go()
+{
+  analogWrite(motorPin1, speed);
+  analogWrite(motorPin2, speed);
 }
 
-void serialEvent() {
-    int ser = Serial.read();
-    if (ser == 1) {
-      digitalWrite(LED_BUILTIN, HIGH);   // turn the LED on (HIGH is the voltage level)
-      delay(1500);                       // wait for a second
-      digitalWrite(LED_BUILTIN, LOW);    // turn the LED off by making the voltage LOW
+// stop the motors
+void stopBot() {
+  analogWrite(motorPin1, 0);
+  analogWrite(motorPin2, 0);
+}
+ 
+void loop() 
+{ 
+  // see if the Particle is sending data
+  if (Serial.available()) {
+    int dest_zone = Serial.read();
+    if (dest_zone == 1) {
+      go();
       delay(1500);
+      stopBot();
+      beep();
     }
-    if (ser == 2) {
-      digitalWrite(LED_BUILTIN, HIGH);   // turn the LED on (HIGH is the voltage level)
-      delay(750);                       // wait for a second
-      digitalWrite(LED_BUILTIN, LOW);    // turn the LED off by making the voltage LOW
-      delay(750);    
+    else if (dest_zone == 2) {
+      go();
+      delay(3000);
+      stopBot();
+      beep();
     }
-    if (ser == 3) {
-      digitalWrite(LED_BUILTIN, HIGH);   // turn the LED on (HIGH is the voltage level)
-      delay(250);                       // wait for a second
-      digitalWrite(LED_BUILTIN, LOW);    // turn the LED off by making the voltage LOW
-      delay(250);
+    else if (dest_zone == 3) {
+      go();
+      delay(4500);
+      stopBot();
+      beep();
     }
-}
+  }
+} 
