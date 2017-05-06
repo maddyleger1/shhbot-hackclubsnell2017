@@ -1,3 +1,7 @@
+# shhbot-hackclubsnell2017
+Shh bot quiets down people who are being loud!
+
+=======
 # ShhBot
 Quiet down those people on the silent floor of the library who are bothering you! Just message @shhbot `quiet down in zone 1` or `someone is being loud in zone 3!`
 
